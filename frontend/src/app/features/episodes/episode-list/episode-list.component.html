@@ -1,0 +1,38 @@
+<section class="episode-list-page">
+  <header class="page-header">
+    <h1 class="page-title">Episodios</h1>
+    @if (totalCount() > 0) {
+      <span class="total-count">{{ totalCount() }} episodios encontrados</span>
+    }
+  </header>
+
+  <app-episode-filter (filterChange)="onFilterChange($event)" />
+
+  @if (error()) {
+    <app-error-message [message]="error()!" />
+  }
+
+  @if (isLoading()) {
+    <app-loading-spinner />
+  } @else if (!error()) {
+    @defer {
+      <div class="episodes-grid">
+        @for (episode of episodes(); track episode.id) {
+          <app-episode-card [episode]="episode" />
+        } @empty {
+          <p class="empty-state">No hay episodios para mostrar.</p>
+        }
+      </div>
+    } @placeholder {
+      <app-loading-spinner />
+    }
+
+    @if (totalPages() > 1) {
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        (pageChange)="onPageChange($event)"
+      />
+    }
+  }
+</section>

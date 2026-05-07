@@ -1,0 +1,34 @@
+<div class="filter-bar">
+  <div class="filter-group">
+    <label for="name-input" class="filter-label">Nombre</label>
+    <input
+      id="name-input"
+      type="text"
+      class="filter-input"
+      placeholder="Ej: Pilot, Rickmancing..."
+      [ngModel]="name()"
+      (ngModelChange)="name.set($event); onInputChange()"
+    />
+  </div>
+
+  <div class="filter-group">
+    <label for="episode-input" class="filter-label">Código de episodio</label>
+    <input
+      id="episode-input"
+      type="text"
+      class="filter-input"
+      placeholder="Ej: S01E01"
+      [ngModel]="episodeCode()"
+      (ngModelChange)="episodeCode.set($event); onInputChange()"
+    />
+  </div>
+
+  <button
+    class="clear-btn"
+    (click)="clearFilters()"
+    [disabled]="!name() && !episodeCode()"
+    aria-label="Limpiar filtros"
+  >
+    Limpiar
+  </button>
+</div>
