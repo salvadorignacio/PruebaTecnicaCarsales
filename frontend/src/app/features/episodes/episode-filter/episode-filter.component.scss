@@ -26,7 +26,8 @@
   text-transform: uppercase;
 }
 
-.filter-input {
+.filter-input,
+.filter-select {
   background: #111827;
   border: 1px solid #374151;
   border-radius: 8px;
@@ -35,6 +36,7 @@
   padding: 0.6rem 0.9rem;
   outline: none;
   transition: border-color 0.2s;
+  width: 100%;
 
   &::placeholder {
     color: #4b5563;
@@ -42,6 +44,25 @@
 
   &:focus {
     border-color: #97ce4c;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.filter-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+
+  option {
+    background: #1f2937;
+    color: #f3f4f6;
   }
 }
 

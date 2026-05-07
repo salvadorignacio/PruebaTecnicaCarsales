@@ -7,8 +7,23 @@
       class="filter-input"
       placeholder="Ej: Pilot, Rickmancing..."
       [ngModel]="name()"
-      (ngModelChange)="name.set($event); onInputChange()"
+      (ngModelChange)="onNameChange($event)"
     />
+  </div>
+
+  <div class="filter-group">
+    <label for="season-select" class="filter-label">Temporada</label>
+    <select
+      id="season-select"
+      class="filter-select"
+      [ngModel]="season()"
+      (ngModelChange)="onSeasonChange($event)"
+    >
+      <option value="">Todas las temporadas</option>
+      @for (s of seasons; track s.value) {
+        <option [value]="s.value">{{ s.label }}</option>
+      }
+    </select>
   </div>
 
   <div class="filter-group">
@@ -19,14 +34,15 @@
       class="filter-input"
       placeholder="Ej: S01E01"
       [ngModel]="episodeCode()"
-      (ngModelChange)="episodeCode.set($event); onInputChange()"
+      (ngModelChange)="onEpisodeCodeChange($event)"
+      [disabled]="!!season()"
     />
   </div>
 
   <button
     class="clear-btn"
     (click)="clearFilters()"
-    [disabled]="!name() && !episodeCode()"
+    [disabled]="!name() && !episodeCode() && !season()"
     aria-label="Limpiar filtros"
   >
     Limpiar
