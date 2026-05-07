@@ -1,0 +1,20 @@
+<article class="episode-card">
+  <div class="card-header">
+    <span class="episode-code">{{ episode().episodeCode }}</span>
+    <span class="episode-id">#{{ episode().id }}</span>
+  </div>
+
+  <div class="card-body">
+    <h3 class="episode-name">{{ episode().name }}</h3>
+    <p class="air-date">
+      <span class="label">Emisión:</span> {{ episode().airDate }}
+    </p>
+  </div>
+
+  <div class="card-footer">
+    <span class="characters-count">
+      <span class="count-number">{{ episode().characters.length }}</span>
+      personajes
+    </span>
+  </div>
+</article>
