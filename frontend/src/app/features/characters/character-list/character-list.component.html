@@ -1,0 +1,38 @@
+<section class="character-list-page">
+  <header class="page-header">
+    <h1 class="page-title">Personajes</h1>
+    @if (totalCount() > 0) {
+      <span class="total-count">{{ totalCount() }} personajes encontrados</span>
+    }
+  </header>
+
+  <app-character-filter (filterChange)="onFilterChange($event)" />
+
+  @if (error()) {
+    <app-error-message [message]="error()!" />
+  }
+
+  @if (isLoading()) {
+    <app-loading-spinner />
+  } @else if (!error()) {
+    @defer {
+      <div class="characters-grid">
+        @for (character of characters(); track character.id) {
+          <app-character-card [character]="character" />
+        } @empty {
+          <p class="empty-state">No hay personajes para mostrar.</p>
+        }
+      </div>
+    } @placeholder {
+      <app-loading-spinner />
+    }
+
+    @if (totalPages() > 1) {
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        (pageChange)="onPageChange($event)"
+      />
+    }
+  }
+</section>
