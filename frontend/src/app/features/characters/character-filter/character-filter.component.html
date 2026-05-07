@@ -1,0 +1,64 @@
+<div class="filter-bar">
+  <div class="filter-group">
+    <label for="char-name" class="filter-label">Nombre</label>
+    <input
+      id="char-name"
+      type="text"
+      class="filter-input"
+      placeholder="Ej: Rick, Morty..."
+      [ngModel]="name()"
+      (ngModelChange)="name.set($event); onInputChange()"
+    />
+  </div>
+
+  <div class="filter-group">
+    <label for="char-status" class="filter-label">Estado</label>
+    <select
+      id="char-status"
+      class="filter-select"
+      [ngModel]="status()"
+      (ngModelChange)="status.set($event); onSelectChange()"
+    >
+      <option value="">Todos</option>
+      @for (s of statuses; track s.value) {
+        <option [value]="s.value">{{ s.label }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="char-species" class="filter-label">Especie</label>
+    <input
+      id="char-species"
+      type="text"
+      class="filter-input"
+      placeholder="Ej: Human, Alien..."
+      [ngModel]="species()"
+      (ngModelChange)="species.set($event); onInputChange()"
+    />
+  </div>
+
+  <div class="filter-group">
+    <label for="char-gender" class="filter-label">Género</label>
+    <select
+      id="char-gender"
+      class="filter-select"
+      [ngModel]="gender()"
+      (ngModelChange)="gender.set($event); onSelectChange()"
+    >
+      <option value="">Todos</option>
+      @for (g of genders; track g.value) {
+        <option [value]="g.value">{{ g.label }}</option>
+      }
+    </select>
+  </div>
+
+  <button
+    class="clear-btn"
+    (click)="clearFilters()"
+    [disabled]="!hasActiveFilters"
+    aria-label="Limpiar filtros"
+  >
+    Limpiar
+  </button>
+</div>
